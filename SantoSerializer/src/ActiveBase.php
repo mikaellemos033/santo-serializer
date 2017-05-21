@@ -9,6 +9,7 @@ abstract class ActiveBase
      *
      */
     public $model;
+    public $call;
 
     /**
      * metodo obrigatorio para todos o serializadores
@@ -34,8 +35,9 @@ abstract class ActiveBase
     /**
      * @param model Model
      */
-    public function __construct($model)
+    public function __construct($model, $call = null)
     {
         $this->model = $model;
+        $this->call  = (string) $call;
     }
 }
