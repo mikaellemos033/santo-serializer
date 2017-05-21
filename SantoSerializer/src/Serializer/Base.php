@@ -21,7 +21,7 @@ class Base
 			return get_object_vars($this->activeSerializer->model);
 		}
 		
-		return call_user_func($this->activeSerializer->model, $this->activeSerializer->call);
+		return call_user_func([$this->activeSerializer->model, $this->activeSerializer->call]);
 	}
 
 	/** 
