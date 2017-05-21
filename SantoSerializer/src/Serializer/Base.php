@@ -6,10 +6,12 @@ use SantoSerializer\ActiveBase;
 class Base
 {
 	protected $activeSerializer;
+	protected $call;
 
-	public function __construct(ActiveBase $activeSerializer)
+	public function __construct(ActiveBase $activeSerializer, $call = null)
 	{
 		$this->activeSerializer = $activeSerializer;
+		$this->call 			= (string) $call;
 	}
 
 	/**
@@ -17,7 +19,11 @@ class Base
 	 */
 	public function parseAttributes()
 	{
-		return get_object_vars($this->activeSerializer->model);
+		if (empty($this->call)) {
+			return get_object_vars($this->activeSerializer->model);
+		}
+		
+		return call_user_func($this->activeSerializer->model, $this->call);
 	}
 
 	/** 
